@@ -1,0 +1,8 @@
+{
+  "desired": {
+    "airConditioningIsOn": false
+  },
+  "reported": {
+    "airConditioningIsOn": false
+  }
+}
