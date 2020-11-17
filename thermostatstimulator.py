@@ -85,15 +85,15 @@ mqttc = paho.Client()
 mqttc.on_connect = on_connect
 mqttc.on_message = on_message
 #mqttc.on_log = on_log
-SHADOW_CLIENT = "Rpitest_1"
-SHADOW_HANDLER = "Rpitest_1"
-awshost = "a34shxdjresocf-ats.iot.us-east-1.amazonaws.com"
+SHADOW_CLIENT = "Thermostat"
+SHADOW_HANDLER = "Thermostat"
+awshost = "a34shxdjresocf-ats.iot.us-west-2.amazonaws.com"
 awsport = 8883
-clientId = "Rpitest_1"
-thingName = "Rpitest_1"
+clientId = "Thermostat"
+thingName = "Thermostat"
 caPath = "AmazonRootCA1.pem.txt"
-certPath = "948e0aa2e5-certificate.pem.crt"
-keyPath = "948e0aa2e5-private.pem.key"
+certPath = "certificate.pem"
+keyPath = "private.key"
 # client=boto3.client('iot-data')
 
 myShadowClient = AWSIoTMQTTShadowClient(SHADOW_CLIENT)
@@ -123,7 +123,7 @@ while 1==1:
             temp=increaseTemperature(temp)
         listu={'deviceId':deviceId,'temp':temp,'dist':dist,'time':d}
         payload = json.dumps(listu, separators=(',', ':'))
-        mqttc.publish("rfid", payload, qos=1)
+        mqttc.publish("readings", payload, qos=1)
         dist-=7
         print(temp,airConditioningIsOn)
         if(temp>-65):
